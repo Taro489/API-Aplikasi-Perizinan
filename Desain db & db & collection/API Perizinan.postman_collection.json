@@ -1,0 +1,1499 @@
+{
+	"info": {
+		"_postman_id": "f78c5a4c-9f24-4e5f-96aa-3e3a33b12943",
+		"name": "API Perizinan",
+		"description": "API perizinan merupakan aplikasi yang dirancang menggunakan framework Laravel 11. Kemudian untuk mengakses API menggunakan plugin Laravel Valet untuk mempermudah perancangan. Perlu diperhatikan karena API perizinan ini menggunakan Laravel Sanctum, sehingga untuk setiap proses yang berjalan di setiap pengguna mengharuskan untuk login terlebih dahulu dan menggunakan token yang diberikan. Berikut merupakan operasi yang dapat dilakukan oleh masing-masing level pengguna.\n\n- Admin:\n    - Melihat semua user\n    - Menambahkan/mendaftarkan user verifikator\n    - Mengubah status user biasa menjadi verifikator\n    - Melihat izin yang diajukan\n    - Reset Password user\n- Verifikator:\n    - Memverifikasi pendaftaran pengguna\n    - Melakukan ACC / Penolakan terhadap pengajuan izin, disertai komentar\n- User Biasa:\n    - Mendaftar\n    - Mengajukan izin (Cuti, Libur Sakit, dll)\n    - Melihat daftar izin yang pernah diajukan\n    - Mengubah/update detail izin yang diajukan\n    - Melihat status pengajuan izinnya\n    - Membatalkan pengajuan izin\n    - Menghapus pengjuan izin\n    - Update password",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13934587"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Login admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5|RFNEDUuOY7IR19yCFOAhWkdojwfAxTmtRQg7AxZr39065945",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@email.com\",\r\n    \"password\" : \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/login",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login gagal",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"admin@email.com\",\r\n    \"password\" : \"admin1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/logout",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Melihat semua user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|UExEIqHi6QHajYtrDmdCCSBc84bczuNk4r5bFsYP806d8b26",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@email.com\",\r\n    \"password\" : \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/read-user",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"read-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sukses",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"admin@email.com\",\r\n    \"password\" : \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/read-user",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"read-user"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Pengguna tidak ditemukan",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"admin@email.com\",\r\n    \"password\" : \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/read-user",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"read-user"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Menambahkan user verifikator",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|UExEIqHi6QHajYtrDmdCCSBc84bczuNk4r5bFsYP806d8b26",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"verificator2\",\r\n    \"email\" : \"verificator2@email.com\",\r\n    \"password\" : \"verificator2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/add-verificator",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"add-verificator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Email sudah ada",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"verificator2\",\r\n    \"email\" : \"verificator2@email.com\",\r\n    \"password\" : \"verificator2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/add-verificator",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"add-verificator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 06:04:29 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": [\n        \"The email has already been taken.\"\n    ]\n}"
+						},
+						{
+							"name": "Field required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"\",\r\n    \"email\" : \"\",\r\n    \"password\" : \"verificator2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/add-verificator",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"add-verificator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 06:05:56 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": [\n        \"The name field is required.\"\n    ],\n    \"email\": [\n        \"The email field is required.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Mengubah status user biasa menjadi verifikator",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|UExEIqHi6QHajYtrDmdCCSBc84bczuNk4r5bFsYP806d8b26",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/promote-verificator",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"promote-verificator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Field required",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/promote-verificator",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"promote-verificator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 06:08:24 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": [\n        \"The id field is required.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Melihat izin yang diajukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yrOUkofFBkV5tLtm5BsrjquXoDAR0Xn7GJ4WvlwM880436b7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api-perizinan.test/api/read-permittion",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"read-permittion"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Data tidak tersedia",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://api-perizinan.test/api/read-permittion",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"read-permittion"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 23:13:23 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Data perizinan tidak tersedia\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yrOUkofFBkV5tLtm5BsrjquXoDAR0Xn7GJ4WvlwM880436b7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\" : \"passworduser1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/user-updatepass/3",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"user-updatepass",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verifikator",
+			"item": [
+				{
+					"name": "Login verifikator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"verifikator@email.com\",\r\n    \"password\" : \"verifikator\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/login",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login gagal",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"verifikator@email.com\",\r\n    \"password\" : \"verifikator1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/login",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Memverifikasi pendaftaran pengguna",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5|pC5AnRqkDk0LvgbWoZVuMaySoW6t1jucPx5xk6EV93c2320d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://api-perizinan.test/api/verify-user/6",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"verify-user",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sudah diverifikasi",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://api-perizinan.test/api/verify-user/6",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"verify-user",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 09:46:25 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Pengguna sudah diverifikasi!\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Melakukan ACC / Penolakan terhadap pengajuan izin, disertai komentar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5|pC5AnRqkDk0LvgbWoZVuMaySoW6t1jucPx5xk6EV93c2320d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"2\",\r\n    \"permittionId\" : \"2\",\r\n    \"comment\" : \"Baik saya izinkan untuk hari ini\",\r\n    \"isAccepted\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/accept-permittion",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"accept-permittion"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Field required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\" : \"2\",\r\n    \"permittionId\" : \"2\",\r\n    \"comment\" : \"\",\r\n    \"isAccepted\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/accept-permittion",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"accept-permittion"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 07:03:22 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"comment\": [\n        \"The comment field is required.\"\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User biasa",
+			"item": [
+				{
+					"name": "Login user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|oBPK9U5wrHurWzEaEMqsvQZV8AAGVvoPEj47AXZAad9ceded",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"user1@email.com\",\r\n    \"password\" : \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/login",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login gagal",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"user1@email.com\",\r\n    \"password\" : \"user1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/login",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Mendaftar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|pECcXdlwskWxYe0c3ei8H1e7PwsU3X7N79nLvikm88a59d5d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"user7\",\r\n    \"email\" : \"user7@email.com\",\r\n    \"password\" : \"password7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/register",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Email taken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"user7\",\r\n    \"email\" : \"user7@email.com\",\r\n    \"password\" : \"password7\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/register",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.19.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Mar 2024 10:32:53 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": [\n        \"The email has already been taken.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Mengajukan izin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\" : \"Cuti\",\r\n    \"description\" : \"Assalamualaikum pak, izin hari ini saya tidak bisa masuk kantor, dikarenakan saya sedang demam dan flu. Terima kasih\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/permittion",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"permittion"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Field required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"subject\" : \"Cuti\",\r\n    \"description\" : \"Assalamualaikum pak, izin hari ini saya tidak bisa masuk kantor, dikarenakan saya sedang demam dan flu. Terima kasih\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/permittion",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"permittion"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Melihat daftar izin yang pernah diajukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api-perizinan.test/api/permittion",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"permittion"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Perizinan tidak tersedia",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://api-perizinan.test/api/permittion",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"permittion"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Mengubah/update detail izin yang diajukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\" : \"Sakit\",\r\n    \"description\" : \"Assalamualaikum pak, izin hari ini saya tidak bisa masuk kantor, dikarenakan saya sedang demam dan flu. Terima kasih\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/permittion/1",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"permittion",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Field required",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"subject\" : \"Sakit\",\r\n    \"description\" : \"Assalamualaikum pak, izin hari ini saya tidak bisa masuk kantor, dikarenakan saya sedang demam dan flu. Terima kasih\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://api-perizinan.test/api/permittion/1",
+									"protocol": "http",
+									"host": [
+										"api-perizinan",
+										"test"
+									],
+									"path": [
+										"api",
+										"permittion",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Melihat status pengajuan izinnya",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api-perizinan.test/api/permittion/1",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"permittion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Membatalkan pengajuan izin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://api-perizinan.test/api/cancel/1",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"cancel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Menghapus pengjuan izin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://api-perizinan.test/api/permittion/1",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"permittion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Wr4i6cQcMXrDC9PSv20DpPkMFYq1DblXwfrW1IPab3bcafd9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\" : \"passworduser6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api-perizinan.test/api/user-updatepass/6",
+							"protocol": "http",
+							"host": [
+								"api-perizinan",
+								"test"
+							],
+							"path": [
+								"api",
+								"user-updatepass",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
